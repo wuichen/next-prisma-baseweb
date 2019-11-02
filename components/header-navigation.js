@@ -85,7 +85,6 @@ const Navigation = ({ toggleSidebar, toggleTheme, toggleDirection }) => {
                   as="img"
                   height="40px"
                   src={theme.name.startsWith('dark') ? LogoWhite : Logo}
-                  width="101px"
                   overrides={{ Block: { style: { cursor: 'pointer' } } }}
                 />
               </Link>

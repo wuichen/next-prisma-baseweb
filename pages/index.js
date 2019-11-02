@@ -73,27 +73,6 @@ const Index = (props) => (
     toggleTheme={props.toggleTheme}
   >
     <Block
-      marginTop={['scale100', 'scale400', 'scale800']}
-      display="block"
-      $as="a"
-      href={BlogPosts[0].path}
-      overrides={{
-        Block: {
-          style: {
-            textDecoration: 'none',
-          },
-        },
-      }}
-    >
-      <Tag kind="positive" closeable={false}>
-        New
-      </Tag>
-      <Block color="foreground" display="inline-block" font="font250">
-        {BlogPosts[0].title}
-      </Block>
-    </Block>
-
-    <Block
       display="flex"
       marginLeft="-16px"
       marginRight="-16px"

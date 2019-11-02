@@ -53,13 +53,13 @@ function findByPath(o, path) {
 //   maxContentWidth?: string,
 // };
 
-const TOCWrapper = themedStyled('div', ({ $theme }) => ({
-  display: 'none',
-  '@media screen and (min-width: 1340px)': {
-    display: 'block',
-    maxWidth: '16em',
-  },
-}));
+// const TOCWrapper = themedStyled('div', ({ $theme }) => ({
+//   display: 'none',
+//   '@media screen and (min-width: 1340px)': {
+//     display: 'block',
+//     maxWidth: '16em',
+//   },
+// }));
 
 const SidebarWrapper = themedStyled('div', ({ $theme, $isOpen, $hideSideNavigation }) => ({
   display: $isOpen ? 'block' : 'none',
@@ -139,7 +139,6 @@ class Layout extends React.Component {
               marginTop="scale300"
               display="flex"
               paddingTop="scale400"
-              justifyContent="center"
             >
               <SidebarWrapper
                 $isOpen={sidebarOpen}
@@ -150,46 +149,7 @@ class Layout extends React.Component {
               >
                 <Sidebar path={path} />
               </SidebarWrapper>
-              <ContentWrapper
-                id="docSearch-content"
-                role="main"
-                $isSidebarOpen={sidebarOpen}
-                $maxWidth={this.props.maxContentWidth}
-              >
-                {isGitHubEditDisabled ? null : (
-                  <Block
-                    display={['none', 'block']}
-                    position="absolute"
-                    top="-10px"
-                    overrides={{
-                      Block: {
-                        style: {
-                          [direction === 'rtl' ? 'left' : 'right']: 0,
-                          [direction === 'rtl' ? 'right' : 'left']: 'auto',
-                        },
-                      },
-                    }}
-                  >
-                    <Button
-                      startEnhancer={() => (
-                        <PencilIcon size={16} color="#666666" />
-                      )}
-                      $as="a"
-                      href={githubUrl}
-                      target="_blank"
-                      size={SIZE.compact}
-                      kind={KIND.minimal}
-                    >
-                      Edit this page
-                    </Button>
-                  </Block>
-                )}
-
-
-              </ContentWrapper>
-              <TOCWrapper>
-                <TableOfContents content={React.Children.toArray(children)} />
-              </TOCWrapper>
+              {children}
             </Block>
             <Footer />
             <Walkthrough />

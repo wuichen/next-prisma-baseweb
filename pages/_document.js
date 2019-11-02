@@ -54,7 +54,7 @@ export default class MyDocument extends Document {
               key={i}
             />
           ))}
-
+          <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" />
           <link rel="stylesheet" href="/static/fonts.css" />
           <style>{`
             body {
