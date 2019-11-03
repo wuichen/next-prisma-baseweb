@@ -18,6 +18,8 @@ import {
   DarkThemeMove,
   LightTheme,
   LightThemeMove,
+  createTheme,
+  lightThemePrimitives
 } from 'baseui';
 import { getMediaQuery } from 'baseui/helpers/responsive-helpers';
 // import type { BreakpointsT, ThemeT } from 'baseui/styles/types';
@@ -51,131 +53,19 @@ const ResponsiveTheme = Object.keys(Breakpoints).reduce(
   {
     breakpoints: {},
     media: {},
-    borders: {
-      "useRoundedCorners": true,
-      "buttonBorderRadius": "6px",
-      "inputBorderRadius": "6px",
-      "popoverBorderRadius": "6px",
-      "surfaceBorderRadius": "6px"
-    },
-    "typography": {
-      "font100": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "10px",
-        "fontWeight": "normal",
-        "lineHeight": "20px"
-      },
-      "font150": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "10px",
-        "fontWeight": "500",
-        "lineHeight": "20px"
-      },
-      "font200": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "12px",
-        "fontWeight": "normal",
-        "lineHeight": "20px"
-      },
-      "font250": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "12px",
-        "fontWeight": 300,
-        "lineHeight": "20px"
-      },
-      "font300": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "14px",
-        "fontWeight": "normal",
-        "lineHeight": "24px"
-      },
-      "font350": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "14px",
-        "fontWeight": 300,
-        "lineHeight": "24px"
-      },
-      "font400": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "normal",
-        "lineHeight": "28px"
-      },
-      "font450": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "16px",
-        "fontWeight": 300,
-        "lineHeight": "28px"
-      },
-      "font550": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "18px",
-        "fontWeight": 300,
-        "lineHeight": "28px"
-      },
-      "font650": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "22px",
-        "fontWeight": 300,
-        "lineHeight": "32px"
-      },
-      "font750": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "24px",
-        "fontWeight": 300,
-        "lineHeight": "36px"
-      },
-      "font850": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "32px",
-        "fontWeight": 300,
-        "lineHeight": "40px"
-      },
-      "font950": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "36px",
-        "fontWeight": 300,
-        "lineHeight": "44px"
-      },
-      "font1050": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "40px",
-        "fontWeight": 300,
-        "lineHeight": "52px"
-      },
-      "font1150": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "36px",
-        "fontWeight": 300,
-        "lineHeight": "44px"
-      },
-      "font1250": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "44px",
-        "fontWeight": 300,
-        "lineHeight": "52px"
-      },
-      "font1350": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "52px",
-        "fontWeight": 300,
-        "lineHeight": "64px"
-      },
-      "font1450": {
-        "fontFamily": "\"Oswald\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-        "fontSize": "96px",
-        "fontWeight": 300,
-        "lineHeight": "112px"
-      }
-    },
   },
 );
 
 const themes = {
-  LightTheme: {
-    ...LightTheme,
+  // REMIND: Current way of creating custom style. only light theme has custom styles. dark doesnt
+  LightTheme: createTheme({
+    ...lightThemePrimitives,
+    // add all the properties here you'd like to override from the light theme primitives
+    primaryFontFamily: '"Poppins", sans-serif',
+  }, {
+    name: 'lightTheme',
     ...ResponsiveTheme,
-  },
+  }),
   LightThemeMove: {
     ...LightThemeMove,
     ...ResponsiveTheme,
@@ -189,8 +79,6 @@ const themes = {
     ...ResponsiveTheme,
   },
 };
-
-// type AppThemeT = ThemeT & { media: $ObjMap<BreakpointsT, <V>(V) => string> };
 
 export const themedStyled = createThemedStyled();
 export const themedWithStyle = createThemedWithStyle();
@@ -270,25 +158,25 @@ export default class MyApp extends App {
     const ls = window.localStorage;
 
     const config = {
-      font: 'move',
+      // font: 'move',
       theme: 'light',
     };
 
-    const presetFont = ls.getItem('docs-font');
+    // const presetFont = ls.getItem('docs-font');
     const presetTheme = ls.getItem('docs-theme');
 
-    let fontToSet;
+    // let fontToSet;
     let themeToSet;
 
-    if (search.includes('font=move')) {
-      fontToSet = 'move';
-      ls.setItem('docs-font', fontToSet);
-    }
+    // if (search.includes('font=move')) {
+    //   fontToSet = 'move';
+    //   ls.setItem('docs-font', fontToSet);
+    // }
 
-    if (search.includes('font=system')) {
-      fontToSet = 'system';
-      ls.setItem('docs-font', fontToSet);
-    }
+    // if (search.includes('font=system')) {
+    //   fontToSet = 'system';
+    //   ls.setItem('docs-font', fontToSet);
+    // }
 
     if (search.includes('theme=dark')) {
       themeToSet = 'dark';
@@ -300,17 +188,20 @@ export default class MyApp extends App {
       ls.setItem('docs-theme', themeToSet);
     }
 
-    config.font = fontToSet || presetFont || config.font;
+    // config.font = fontToSet || presetFont || config.font;
     config.theme = themeToSet || presetTheme || config.theme;
 
+
     const themeName =
-      config.theme === 'dark'
-        ? config.font === 'move'
-          ? 'DarkThemeMove'
-          : 'DarkTheme'
-        : config.font === 'move'
-          ? 'LightThemeMove'
-          : 'LightTheme';
+      config.theme === 'dark' ? 'DarkTheme' : 'LightTheme';
+    // const themeName =
+    //   config.theme === 'dark'
+    //     ? config.font === 'move'
+    //       ? 'DarkThemeMove'
+    //       : 'DarkTheme'
+    //     : config.font === 'move'
+    //       ? 'LightThemeMove'
+    //       : 'LightTheme';
 
     this.setState({
       theme: themes[themeName],

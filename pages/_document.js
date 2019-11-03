@@ -54,7 +54,11 @@ export default class MyDocument extends Document {
               key={i}
             />
           ))}
-          <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" />
+          {/*
+            TIPS: font weights need to  be added here to be enabled in theme setting
+          */}
+          <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap" rel="stylesheet" />
+
           <link rel="stylesheet" href="/static/fonts.css" />
           <style>{`
             body {

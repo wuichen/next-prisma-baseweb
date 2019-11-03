@@ -74,6 +74,7 @@ const Navigation = ({ toggleSidebar, toggleTheme, toggleDirection }) => {
                 paddingTop: $theme.sizing.scale600,
                 paddingBottom: $theme.sizing.scale600,
                 boxShadow: 'none',
+                border: 'none'
               }),
             },
           }}
