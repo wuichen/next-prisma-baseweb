@@ -9,7 +9,7 @@ LICENSE file in the root directory of this source tree.
 
 import * as React from 'react';
 import { Block } from 'baseui/block';
-import { Button } from 'baseui/button';
+import { Button, KIND } from "baseui/button";
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { StyledLink as Link } from 'baseui/link';
 import { Card, StyledBody } from 'baseui/card';
@@ -18,7 +18,8 @@ import fetch from 'isomorphic-fetch';
 
 const BlogPosts = [{ path: 'http://www.google.com', title: 'google' }]
 import Layout from '../components/Layout/public';
-// import Contributors from '../components/contributors';
+import { H3, Paragraph2 } from 'baseui/typography';
+
 
 
 const cardOverrides = {
@@ -38,436 +39,61 @@ const Index = (props) => (
     toggleDirection={props.toggleDirection}
     toggleTheme={props.toggleTheme}
   >
-    <Block
-      marginLeft="-16px"
-      marginRight="-16px"
-      overrides={{
+    <Block overrides={{
+      Block: {
+        style: ({ $theme }) => ({
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-around',
+          width: '100%',
+          paddingBottom: $theme.sizing.scale3200,
+          background: $theme.colors.mono200
+        }),
+      },
+    }}>
+      <Block overrides={{
         Block: {
           style: ({ $theme }) => ({
-            flexWrap: 'wrap',
-            [$theme.media.small]: {
-              flexWrap: 'nowrap',
-            },
+            padding: $theme.sizing.scale1200,
           }),
         },
-      }}
-    >
-      <Card title="Setup Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Base Web is distributed as an npm package. As Base Web is built on top
-          of a CSS-in-JS engine, all you need is the dependencies from npm.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/setup"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Setup Base Web
-        </Button>
-      </Card>
-
-      <Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card>
-      <Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card><Card title="Learning Base Web" overrides={cardOverrides}>
-        <StyledBody>
-          Probably the best way to learn Base Web is by start building an
-          application using it. On this page, you’ll find a simple and a more
-          complex app built using Base Web.
-        </StyledBody>
-        <Button
-          $as="a"
-          href="/getting-started/learn"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => ({
-                boxSizing: 'border-box',
-                width: '100%',
-              }),
-            },
-          }}
-        >
-          Learn more
-        </Button>
-      </Card>
+      }}>
+        <H3>Create your reward collection</H3>
+        <Paragraph2>Select photos and products to create collections and start earning rewards!</Paragraph2>
+        <Button overrides={{
+          BaseButton: {
+            style: ({ $theme }) => ({
+              marginTop: $theme.sizing.scale600,
+            }),
+          },
+        }} kind={KIND.secondary} onClick={() => alert("click")}>Get Started</Button>
+      </Block>
+      <Block>
+        <Block overrides={{
+          Block: {
+            style: ({ $theme }) => ({
+              width: '300px',
+              marginTop: $theme.sizing.scale1200,
+              [$theme.media.medium]: {
+                marginTop: $theme.sizing.scale3200
+              }
+            }),
+          },
+        }} as='img' src={require('../images/undraw/undraw_online_shopping_ga73.svg')} />
+      </Block>
     </Block>
 
 
   </Layout>
 );
 
-async function fetchContributorsByPage(page = 1) {
-  const res = await fetch(
-    `https://api.github.com/repos/uber/baseweb/contributors?access_token=${process
-      .env.GITHUB_AUTH_TOKEN || ''}&page=${page}`,
-  );
-  return res.json();
-}
+// async function fetchContributorsByPage(page = 1) {
+//   const res = await fetch(
+//     `https://api.github.com/repos/uber/baseweb/contributors?access_token=${process
+//       .env.GITHUB_AUTH_TOKEN || ''}&page=${page}`,
+//   );
+//   return res.json();
+// }
 
 Index.getInitialProps = async () => {
   // let contributors = [];

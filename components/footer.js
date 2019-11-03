@@ -10,6 +10,7 @@ import React from 'react';
 import { Block } from 'baseui/block';
 import Link from 'next/link';
 import { themedStyled } from '../pages/_app';
+import { H1 } from 'baseui/typography';
 
 
 const StyledFooter = themedStyled(
@@ -70,5 +71,6 @@ export default () => (
         <StyledLink href="/blog">Blog</StyledLink>
       </Link>
     </Block>
+    <H1>Mercy</H1>
   </StyledFooter>
 );

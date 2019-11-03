@@ -15,7 +15,6 @@ import HeaderNavigation from '../HeaderNavigation';
 import Footer from '../footer';
 import DirectionContext from '../direction-context';
 import Help from '../help';
-import Survey from '../survey';
 
 class Layout extends React.Component {
   constructor(props) {
@@ -44,7 +43,6 @@ class Layout extends React.Component {
             {this.props.children}
             <Footer />
             <Help />
-            <Survey />
           </React.Fragment>
         )}
       </DirectionContext.Consumer>

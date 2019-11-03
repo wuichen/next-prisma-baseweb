@@ -23,7 +23,7 @@ import { Button, KIND, SIZE } from 'baseui/button';
 import ChevronDown from 'baseui/icon/chevron-down';
 import { StatefulPopover, PLACEMENT as PopoverPlacement } from 'baseui/popover';
 import { StatefulMenu, NestedMenus } from 'baseui/menu';
-import { H2, Paragraph4 } from 'baseui/typography';
+import { H2, Paragraph4, H5 } from 'baseui/typography';
 import { Drawer } from 'baseui/drawer';
 import Headroom from "react-headroom";
 
@@ -70,8 +70,7 @@ const Navigation = ({ toggleSidebar, toggleTheme, toggleDirection }) => {
               <StyledNavigationItem>
                 <Link href="/">
                   <StyledLink href="/">
-                    <H2 margin={0}>Mercy</H2>
-                    <Paragraph4>Collection reward page builder</Paragraph4>
+                    <H5 margin={0}>Mercy</H5>
                   </StyledLink>
                 </Link>
               </StyledNavigationItem>

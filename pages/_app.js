@@ -51,8 +51,19 @@ const ResponsiveTheme = Object.keys(Breakpoints).reduce(
     return acc;
   },
   {
+    name: 'lightTheme',
     breakpoints: {},
     media: {},
+    colors: {
+      "buttonSecondaryFill": "#ffc107",
+      "buttonSecondaryText": "#000000",
+      "buttonSecondaryHover": "#FFE3AC",
+      "buttonSecondaryActive": "#FFC043",
+      "buttonSecondarySelectedFill": "#E2E2E2",
+      "buttonSecondarySelectedText": "#000000",
+      "buttonSecondarySpinnerForeground": "#333333",
+      "buttonSecondarySpinnerBackground": "#CBCBCB",
+    }
   },
 );
 
@@ -63,7 +74,6 @@ const themes = {
     // add all the properties here you'd like to override from the light theme primitives
     primaryFontFamily: '"Poppins", sans-serif',
   }, {
-    name: 'lightTheme',
     ...ResponsiveTheme,
   }),
   LightThemeMove: {
