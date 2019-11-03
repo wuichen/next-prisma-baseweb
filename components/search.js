@@ -13,44 +13,34 @@ import { themedStyled } from '../pages/_app';
 
 const SEARCH_INPUT_ID = 'algolia-doc-search';
 
-// type Props = {
-//   toggleSearchInput: () => void,
-//   searchInputOpen: boolean,
-// };
-// type State = {
-//   enabled: boolean,
-// };
-
-// can't really use baseui/input because algolia injects its
-// own markdown and breaks our component (that's fairly complex)
-// const PlainInput = themedStyled(
-//   'input',
-//   ({ $inputVisible, $theme }) =>
-//     ({
-//       display: $inputVisible ? 'block' : 'none',
-//       borderWidth: '2px',
-//       borderColor: $theme.colors.inputEnhancerFill,
-//       borderStyle: 'solid',
-//       paddingLeft: $theme.direction === 'rtl' ? '9px' : '42px',
-//       paddingRight: $theme.direction === 'rtl' ? '42px' : '9px',
-//       backgroundColor: 'transparent',
-//       paddingTop: '9px',
-//       paddingBottom: '9px',
-//       fontSize: '14px',
-//       width: $inputVisible ? '62vw' : '250px',
-//       lineHeight: '20px',
-//       outline: 'none',
-//       '-webkit-appearance': 'none',
-//       ':focus': {
-//         borderColor: $theme.colors.primary,
-//       },
-//       [$theme.media.small]: {
-//         position: 'static',
-//         display: 'block',
-//         width: '250px',
-//       },
-//     })
-// );
+const PlainInput = themedStyled(
+  'input',
+  ({ $inputVisible, $theme }) =>
+    ({
+      display: $inputVisible ? 'block' : 'none',
+      borderWidth: '2px',
+      borderColor: $theme.colors.inputEnhancerFill,
+      borderStyle: 'solid',
+      paddingLeft: $theme.direction === 'rtl' ? '9px' : '42px',
+      paddingRight: $theme.direction === 'rtl' ? '42px' : '9px',
+      backgroundColor: 'transparent',
+      paddingTop: '9px',
+      paddingBottom: '9px',
+      fontSize: '14px',
+      width: $inputVisible ? '62vw' : '250px',
+      lineHeight: '20px',
+      outline: 'none',
+      '-webkit-appearance': 'none',
+      ':focus': {
+        borderColor: $theme.colors.primary,
+      },
+      [$theme.media.small]: {
+        position: 'static',
+        display: 'block',
+        width: '250px',
+      },
+    })
+);
 
 const SearchContainer = themedStyled(
   'div',
@@ -87,19 +77,6 @@ class DocSearch extends React.Component {
   };
   componentDidMount() {
     // eslint-disable-next-line
-    const { docsearch } = window;
-    if (docsearch) {
-      docsearch({
-        apiKey: '05dde354af2e84a6d80e426518498d71',
-        indexName: 'baseui',
-        inputSelector: `#${SEARCH_INPUT_ID}`,
-        debug: true,
-      });
-    } else {
-      // eslint-disable-next-line no-console
-      console.warn('Search has failed to load and now is being disabled');
-      this.setState({ enabled: false });
-    }
   }
 
   render() {
@@ -133,14 +110,14 @@ class DocSearch extends React.Component {
               color={searchInputOpen ? '#333' : '#666'}
             />
           </IconWrapper>
-          {/*<PlainInput
+          <PlainInput
             $inputVisible={searchInputOpen}
             id={SEARCH_INPUT_ID}
             type="search"
-            placeholder="Search documentation"
-            aria-label="Search documentation"
-            onChange={e => trackEvent('algolia_search', e.target.value)}
-          />*/}
+            placeholder="Search"
+            aria-label="Search"
+            onChange={e => console.log(e.target.value)}
+          />
         </SearchContainer>
       </React.Fragment>
     ) : null;

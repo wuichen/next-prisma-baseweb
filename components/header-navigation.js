@@ -28,7 +28,9 @@ import { ThemeContext } from 'baseui/styles/theme-provider.js';
 import Bulb from './bulb';
 import { StatefulTooltip } from 'baseui/tooltip';
 import { Button, KIND, SIZE } from 'baseui/button';
-
+import ChevronDown from 'baseui/icon/chevron-down';
+import { StatefulPopover, PLACEMENT as PopoverPlacement } from 'baseui/popover';
+import { StatefulMenu, NestedMenus } from 'baseui/menu';
 const Hamburger = themedStyled('div', ({ $theme }) => ({
   display: 'block',
   userSelect: 'none',
@@ -58,6 +60,51 @@ const LogoSegment = themedStyled(
 //   toggleTheme: () => void,
 //   toggleDirection: () => void,
 // };
+
+const ExtraMenu = ({ items }) => {
+  return (
+    <StatefulPopover
+      placement={PopoverPlacement.bottomLeft}
+      dismissOnClickOutside={false}
+      content={({ close }) => {
+        return (
+          <StatefulMenu
+            items={items}
+            onItemSelect={({ item }) => {
+              if (item.link) {
+                window.open(item.link);
+              } else if (item.action) {
+                item.action()
+              }
+              close();
+            }}
+            overrides={{
+              List: {
+                style: {
+                  width: '100px',
+                },
+              },
+              Option: {
+                props: {
+                  size: 'compact'
+                },
+              },
+            }}
+          />
+        )
+      }}
+    >
+      <Button
+        size="compact"
+        kind={KIND.minimal}
+        endEnhancer={() => <ChevronDown size={20} />}
+      >
+        Extra
+      </Button>
+    </StatefulPopover>
+  );
+};
+
 
 const Navigation = ({ toggleSidebar, toggleTheme, toggleDirection }) => {
   const [searchInputOpen, setSearchInputOpen] = React.useState(false);
@@ -141,97 +188,24 @@ const Navigation = ({ toggleSidebar, toggleTheme, toggleDirection }) => {
                 searchInputOpen={searchInputOpen}
                 toggleSearchInput={() => setSearchInputOpen(!searchInputOpen)}
               />
-              <Block
-                $as="a"
-                overrides={{
-                  Block: {
-                    style: ({ $theme }) => ({
-                      display: 'none',
-                      height: $theme.sizing.scale800,
-                      [$theme.media.small]: {
-                        display: 'block',
-                      },
-                    }),
-                  },
-                }}
-                href="https://join.slack.com/t/baseui/shared_invite/enQtNDI0NTgwMjU0NDUyLWQ0M2RhZWNiMDAwNDA4MDFiOWQyNmViODNkMzFmZDczYzM4MDliNjU3MmZhYWE5YjZhZmJjZWY0MDIxZjdkYzE"
-                marginLeft="scale400"
-                marginRight="scale400"
-                $style={{ textDecoration: 'none' }}
-                target="_blank"
-              >
-                <SlackLogo size={24} color={theme.colors.foreground} />
-              </Block>
-              <Block
-                $as="a"
-                overrides={{
-                  Block: {
-                    style: ({ $theme }) => ({
-                      display: 'none',
-                      height: $theme.sizing.scale800,
-                      [$theme.media.small]: {
-                        display: 'block',
-                      },
-                    }),
-                  },
-                }}
-                href="https://github.com/uber/baseweb"
-                marginLeft="scale300"
-                $style={{ textDecoration: 'none' }}
-                target="_blank"
-              >
-                <GithubLogo size={24} color={theme.colors.foreground} />
-              </Block>
-              <Block
-                as="span"
-                font="font300"
-                marginLeft="scale400"
-                marginRight="scale400"
-                onClick={toggleDirection}
-                overrides={{
-                  Block: {
-                    style: ({ $theme }) => ({
-                      cursor: 'pointer',
-                      display: 'none',
-                      height: $theme.sizing.scale800,
-                      [$theme.media.small]: {
-                        display: 'block',
-                      },
-                    }),
-                  },
-                }}
-              >
-                {theme.direction === 'rtl' ? (
+              <ExtraMenu items={[{
+                link: 'http://www.google.com',
+                label: <SlackLogo size={24} color={theme.colors.foreground} />
+              },
+              {
+                label: <GithubLogo size={24} color={theme.colors.foreground} />,
+                link: 'http://www.github.com'
+              }, {
+                label: theme.direction === 'rtl' ? (
                   <AlignLeftIcon size={24} color={theme.colors.foreground} />
                 ) : (
                     <AlignRightIcon size={24} color={theme.colors.foreground} />
-                  )}
-              </Block>
-              <Block
-                $as="a"
-                overrides={{
-                  Block: {
-                    style: ({ $theme }) => ({
-                      height: $theme.sizing.scale800,
-                      [$theme.media.small]: {
-                        display: 'block',
-                      },
-                    }),
-                  },
-                }}
-                $style={{ textDecoration: 'none' }}
-                href="#"
-                onClick={toggleTheme}
-              >
-                <StatefulTooltip
-                  content="Switch theme"
-                  accessibilityType={'tooltip'}
-                >
-                  <Block as="span" font="font300">
-                    <Bulb size={24} color={theme.colors.foreground} />
-                  </Block>
-                </StatefulTooltip>
-              </Block>
+                  ),
+                action: toggleDirection
+              }, {
+                label: <Bulb size={24} color={theme.colors.foreground} />,
+                action: toggleTheme
+              }]} />
               <Hamburger role="button" onClick={toggleSidebar}>
                 <Menu size={32} color={theme.colors.foregroundAlt} />
               </Hamburger>

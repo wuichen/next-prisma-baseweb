@@ -32,40 +32,6 @@ const cardOverrides = {
   },
 };
 
-// const Adopters = (props) => (
-//   <>
-//     <H2>Who is using Base Web?</H2>
-//     <Block>
-//       <FlexGrid flexGridColumnCount={3} backgroundColor="mono100">
-//         {props.logoSrcs.map((logoSrc, i) => (
-//           <FlexGridItem
-//             key={i}
-//             display="flex"
-//             alignItems="center"
-//             justifyContent="center"
-//           >
-//             <Block width="125px" $as="img" src={logoSrc} />
-//           </FlexGridItem>
-//         ))}
-//       </FlexGrid>
-//       <Button
-//         $as="a"
-//         href="https://github.com/uber/baseweb/issues/1889"
-//         size="compact"
-//         kind="secondary"
-//         overrides={{
-//           BaseButton: {
-//             style: ({ $theme }) => ({
-//               marginTop: $theme.sizing.scale800,
-//             }),
-//           },
-//         }}
-//       >
-//         Please let us know if you are using Base Web!
-//       </Button>
-//     </Block>
-//   </>
-// );
 
 const Index = (props) => (
   <Layout
@@ -131,14 +97,7 @@ const Index = (props) => (
       </Card>
     </Block>
 
-    {/*<Adopters
-      logoSrcs={[
-        '/static/images/uber-logo.png',
-        '/static/images/broadcom-logo.png',
-        '/static/images/extensis-logo.png',
-      ]}
-    />
-    <Contributors contributors={props.contributors} />*/}
+
   </Layout>
 );
 
