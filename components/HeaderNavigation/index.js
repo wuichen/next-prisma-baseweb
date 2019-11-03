@@ -119,7 +119,7 @@ const Navigation = ({ toggleSidebar, toggleTheme, toggleDirection }) => {
                 </StyledNavigationItem>
               </Block>
               <Block>
-                <Hamburger role="button" onClick={() => { setIsDrawerOpen(true) }}>
+                <Hamburger role="button" onClick={() => { setIsDrawerOpen(!isDrawerOpen) }}>
                   <Menu size={32} />
                 </Hamburger>
               </Block>
