@@ -9,8 +9,9 @@ LICENSE file in the root directory of this source tree.
 import React from 'react';
 import { Block } from 'baseui/block';
 import Link from 'next/link';
-import { themedStyled } from '../pages/_app';
+import { themedStyled } from '../../pages/_app';
 import { H1 } from 'baseui/typography';
+import { size } from 'polished';
 
 
 const StyledFooter = themedStyled(
@@ -48,7 +49,7 @@ const StyledLink = themedStyled('a', ({ $theme }) => ({
 
 export default () => (
   <StyledFooter>
-    <Block paddingBottom="scale1000">
+    <Block paddingBottom="scale1600">
       <StyledLink href="https://github.com/uber/baseweb" target="_blank">
         GitHub
       </StyledLink>

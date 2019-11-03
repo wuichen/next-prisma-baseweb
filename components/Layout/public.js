@@ -12,7 +12,7 @@ import { Button, KIND, SIZE } from 'baseui/button';
 import { StatefulTooltip } from 'baseui/tooltip';
 import { themedStyled } from '../../pages/_app';
 import HeaderNavigation from '../HeaderNavigation';
-import Footer from '../footer';
+import Footer from '../Footer';
 import DirectionContext from '../direction-context';
 import Help from '../help';
 
