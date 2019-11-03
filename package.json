@@ -17,6 +17,7 @@
     "next-optimized-images": "^2.5.4",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
+    "react-headroom": "^3.0.0",
     "styletron-engine-atomic": "^1.1.2",
     "styletron-react": "^5.0.1",
     "universal-cookie": "^4.0.2"

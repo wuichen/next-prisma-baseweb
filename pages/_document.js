@@ -64,6 +64,9 @@ export default class MyDocument extends Document {
             body {
               margin: 0;
             }
+            a {
+              text-decoration: none;
+            }
           `}</style>
           <Favicons />
         </Head>
