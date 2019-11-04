@@ -54,6 +54,13 @@ const ResponsiveTheme = Object.keys(Breakpoints).reduce(
     name: 'lightTheme',
     breakpoints: {},
     media: {},
+    borders: {
+      "useRoundedCorners": true,
+      "buttonBorderRadius": "6px",
+      "inputBorderRadius": "6px",
+      "popoverBorderRadius": "6px",
+      "surfaceBorderRadius": "6px"
+    },
     colors: {
       "buttonSecondaryFill": "#ffc107",
       "buttonSecondaryText": "#000000",

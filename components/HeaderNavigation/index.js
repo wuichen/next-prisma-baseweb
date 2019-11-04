@@ -53,6 +53,7 @@ const Navigation = ({ toggleSidebar, toggleTheme, toggleDirection }) => {
             className='headerNavigation'
             overrides={{
               Root: {
+                // REMINDER: setting responsive layout causes warnings in console
                 style: ({ $theme }) => ({
                   border: 'none',
                   background: $theme.colors.mono200,

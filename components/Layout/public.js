@@ -16,6 +16,8 @@ import Footer from '../Footer';
 import DirectionContext from '../direction-context';
 import Help from '../help';
 
+import MobileDetect from "mobile-detect";
+
 class Layout extends React.Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,15 @@ class Layout extends React.Component {
   render() {
     const { sidebarOpen } = this.state;
     const { toggleTheme, toggleDirection, children } = this.props;
+    const updateChildrenWithProps = React.Children.map(
+      this.props.children,
+      (child, i) => {
+        return React.cloneElement(child, {
+          //this properties are available as a props in child components
+          deviceType: this.props.deviceType,
+        });
+      }
+    );
 
     return (
       <DirectionContext.Consumer>
@@ -40,7 +51,7 @@ class Layout extends React.Component {
               toggleTheme={toggleTheme}
               toggleDirection={toggleDirection}
             />
-            {this.props.children}
+            {updateChildrenWithProps}
             <Footer />
             <Help />
           </React.Fragment>
@@ -49,5 +60,26 @@ class Layout extends React.Component {
     );
   }
 }
+
+
+Layout.getInitialProps = (req) => {
+  let userAgent;
+  let deviceType;
+  if (req) {
+    userAgent = req.headers["user-agent"];
+  } else {
+    userAgent = navigator.userAgent;
+  }
+  const md = new MobileDetect(userAgent);
+  if (md.tablet()) {
+    deviceType = "tablet";
+  } else if (md.mobile()) {
+    deviceType = "mobile";
+  } else {
+    deviceType = "desktop";
+  }
+  return { deviceType };
+};
+
 
 export default Layout;

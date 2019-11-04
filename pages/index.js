@@ -10,16 +10,13 @@ LICENSE file in the root directory of this source tree.
 import * as React from 'react';
 import { Block } from 'baseui/block';
 import { Button, KIND } from "baseui/button";
-import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { StyledLink as Link } from 'baseui/link';
-import { Card, StyledBody } from 'baseui/card';
 import { Tag } from 'baseui/tag';
 import fetch from 'isomorphic-fetch';
-
-const BlogPosts = [{ path: 'http://www.google.com', title: 'google' }]
 import Layout from '../components/Layout/public';
 import { H3, Paragraph2 } from 'baseui/typography';
-
+import { useStyletron } from 'baseui';
+import Router from 'next/router'
 
 
 const cardOverrides = {
@@ -34,84 +31,68 @@ const cardOverrides = {
 };
 
 
-const Index = (props) => (
-  <Layout
-    toggleDirection={props.toggleDirection}
-    toggleTheme={props.toggleTheme}
-  >
-    <Block overrides={{
-      Block: {
-        style: ({ $theme }) => ({
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-around',
-          width: '100%',
-          paddingBottom: $theme.sizing.scale3200,
-          background: $theme.colors.mono200
-        }),
-      },
-    }}>
+const Index = (props) => {
+  const [useCss, theme] = useStyletron();
+  const space = useCss({ marginLeft: theme.sizing.scale300 });
+
+  return (
+    <Layout
+      toggleDirection={props.toggleDirection}
+      toggleTheme={props.toggleTheme}
+    >
       <Block overrides={{
         Block: {
           style: ({ $theme }) => ({
-            padding: $theme.sizing.scale1200,
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            width: '100%',
+            paddingBottom: $theme.sizing.scale3200,
+            background: $theme.colors.mono200
           }),
         },
       }}>
-        <H3>Create your reward collection</H3>
-        <Paragraph2>Select photos and products to create collections and start earning rewards!</Paragraph2>
-        <Button overrides={{
-          BaseButton: {
-            style: ({ $theme }) => ({
-              marginTop: $theme.sizing.scale600,
-            }),
-          },
-        }} kind={KIND.secondary} onClick={() => alert("click")}>Get Started</Button>
-      </Block>
-      <Block>
         <Block overrides={{
           Block: {
             style: ({ $theme }) => ({
-              width: '300px',
-              marginTop: $theme.sizing.scale1200,
-              [$theme.media.medium]: {
-                marginTop: $theme.sizing.scale3200
-              }
+              padding: $theme.sizing.scale1200,
             }),
           },
-        }} as='img' src={require('../images/undraw/undraw_online_shopping_ga73.svg')} />
+        }}>
+          <H3>Create your reward collection</H3>
+          <Paragraph2>Select photos and products to create collections and start earning rewards!</Paragraph2>
+          <Block overrides={{
+            Block: {
+              style: ({ $theme }) => ({
+                marginTop: $theme.sizing.scale600,
+              }),
+            },
+          }}>
+            <Button marginRight='10px' kind={KIND.secondary} onClick={() => Router.push("/create")}>Get Started</Button>
+            <span className={space} />
+            <Button kind={KIND.primary} onClick={() => alert("click")}>Open Dashboard</Button>
+          </Block>
+
+        </Block>
+        <Block>
+          <Block overrides={{
+            Block: {
+              style: ({ $theme }) => ({
+                width: '300px',
+                marginTop: $theme.sizing.scale1200,
+                [$theme.media.medium]: {
+                  marginTop: $theme.sizing.scale3200
+                }
+              }),
+            },
+          }} as='img' src={require('../images/undraw/undraw_online_shopping_ga73.svg')} />
+        </Block>
       </Block>
-    </Block>
 
 
-  </Layout>
-);
-
-// async function fetchContributorsByPage(page = 1) {
-//   const res = await fetch(
-//     `https://api.github.com/repos/uber/baseweb/contributors?access_token=${process
-//       .env.GITHUB_AUTH_TOKEN || ''}&page=${page}`,
-//   );
-//   return res.json();
-// }
-
-Index.getInitialProps = async () => {
-  // let contributors = [];
-  // let page = 1;
-  // while (page !== -1) {
-  //   const res = await fetchContributorsByPage(page);
-  //   contributors = contributors.concat(res);
-  //   if (res.length) {
-  //     page += 1;
-  //   } else {
-  //     page = -1;
-  //   }
-  // }
-
-  // if (Array.isArray(contributors)) {
-  //   return {contributors};
-  // }
-  return { contributors: [] };
+    </Layout>
+  )
 };
+
 
 export default Index;
